@@ -88,12 +88,13 @@
         $$W_p^p(\mu,\nu) \coloneqq \min \left\{\int_{X\times X}d^p(x,y)\mathrm{d}\pi(x,y) \mid \pi\in\Gamma(\mu,\nu)\right\}.$$
     \end{definition}
     \begin{theorem}
-        $$(\mathcal{P}_p(X), W_p) \text{ is a metric space and } x \mapsto \delta_x \text{ is an isometry.}$$ 
+        $$(\mathcal{P}_p(X), W_p) \text{ is a metric space! }$$
     \end{theorem}
 \end{frame}
 
 \begin{frame}{What do we already know about this distance?}
-    By the Kantorovich-Rubinstein Duality we have \begin{align*} W_1(\mu,\nu) &= \sup_{(\phi,\psi) \in I_c} \left\{ \int_X \phi d\mu + \int_X \psi d\nu \right\} \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu + \int_X \phi^c d\nu  \right\} 
+    Firstly, we get that $$x \mapsto \delta_x \text{ is an isometry.}$$ 
+    And, by the Kantorovich-Rubinstein Duality we have \begin{align*} W_1(\mu,\nu) &= \sup_{(\phi,\psi) \in I_c} \left\{ \int_X \phi d\mu + \int_X \psi d\nu \right\} \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu + \int_X \phi^c d\nu  \right\} 
        \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu - \int_X \phi d\nu  \right\} \end{align*}
 \end{frame}
 
