@@ -106,15 +106,23 @@
 \end{frame}
 
 \begin{frame}{Wasserstein distance for normal distributions}
-    
+    For any $\mu_X,\mu_Y \in \mathcal{P}_2(\mathbb{R}^d)$ with $\mathcal{L}(X) = \mu_X$ and $\mathcal{L}(Y) = \mu_Y$ where $X$ and $Y$ are normally distributed, 
+    the Wasserstein distance can be calculated as follows $$W_2(\mu_x,\mu_Y) = \|m_X-m_Y\|^2 + \text{tr}\left(\Sigma_X-2 \cdot \left(\Sigma_Y^{1/2}\Sigma_X\Sigma_Y^{1/2}\right)^{1/2}+\Sigma_Y\right)$$
+    If $\Sigma_X$ and $\Sigma_Y$ commute, this simplifies to $$W_2(\mu_x,\mu_Y) = \|m_X-m_Y\|^2 + \sum_{i = 1}^d \left( \sqrt{\lambda_i^X} - \sqrt{\lambda_i^Y}  \right)^2$$
+    where $\lambda_i^X$ and $\lambda_i^Y$ are the Eigenvalues of $\Sigma_X$ and $\Sigma_Y$ respectively. 
 \end{frame}
 
+\begin{frame}{Normally distributed examples}
+    
+    
+
+\end{frame}
 
 \begin{frame}{Wasserstein distance for $p = \infty$}
     If we restrict ourselves to $\mathcal{P}_\infty(X)$, the space of probability measures with bounded support. We can also define $W_\infty$ as the limit of $W_p$.
     \begin{align*}\lim_{p \to \infty} W_p(\mu,\nu) &= W_\infty(\mu,\nu) =\text{inf}\{\|d(x,y)\|_{L^\infty}(\pi) \mid \pi \in \Gamma(\mu,\nu)\} \\
     &= \underset{\pi \in \Gamma(\mu,\nu)}{\text{inf}}\text{inf}\{C \geq 0 \mid |d(x,y)| \leq C \text{ for } \pi \text{ almost all } (x,y)\} \end{align*} 
-    and we have $$(\mathcal{P}_\infty(X), W_\infty) \text{ is a metric space}$$
+    and we have $$(\mathcal{P}_\infty(X), W_\infty) \text{ is a metric space}$$ 
 \end{frame}
 
 

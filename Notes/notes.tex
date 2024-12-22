@@ -1,0 +1,220 @@
+\documentclass[15pt]{article}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage{bm}
+\usepackage{scrextend}
+%\usepackage{showframe}
+\usepackage{calc}
+\usepackage{changepage}
+\usepackage{mdframed}
+\usepackage{dsfont}
+\usepackage{enumitem}
+\usepackage{pbox}
+\usepackage{setspace}
+\usepackage{stmaryrd}
+\usepackage{setspace}
+\usepackage[table]{xcolor}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage{hanging}
+\usepackage{longtable}
+\usepackage{aligned-overset}
+\usepackage{ntheorem}
+\usepackage{mdframed}
+\usepackage[theorems,breakable]{tcolorbox}%
+
+\allowdisplaybreaks
+\hbadness=10000
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+
+\newcommand{\mathleft}{\@fleqntrue\@mathmargin10pt}
+\newcommand{\mathcenter}{\@fleqnfalse}
+\makeatother
+
+\newcommand*{\QED}{\hfill\ensuremath{\square}} 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\p}{\mathcal{P}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+
+\newcommand{\bol}[1]{\mathbf{#1}}
+
+
+\newlength{\hangwidth}
+\newcommand{\newhang}[1]{\settowidth{\hangwidth}{#1}\par\hangpara{\hangwidth}{1}#1}
+
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+
+\def\Abstand{1cm}
+
+\newtcbtheorem{lemma}{Lemma}{%
+        theorem name,%
+        colframe=gray,%
+        fonttitle=\bfseries,
+        boxsep=5pt,
+        left=5pt, right=5pt, top=5pt, bottom=5pt
+    }{lem}
+
+\newtcbtheorem{theorem}{Theorem}{
+        theorem name,%
+        colframe=gray,%
+        fonttitle=\bfseries,
+        boxsep=5pt,
+        left=5pt, right=5pt, top=5pt, bottom=5pt
+    }{thm}
+
+\newtcbtheorem{definition}{Definition}{
+      theorem name,%
+      colframe=gray,%
+      fonttitle=\bfseries,
+      boxsep=5pt,
+      left=5pt, right=5pt, top=5pt, bottom=5pt
+  }{def}
+
+\title{Notes on Wasserstein distances}
+\author{ }
+\date{}
+
+
+\begin{document}
+
+
+\maketitle
+
+\newlength\breite
+\setlength\breite{\linewidth-4pt}
+\setlength\fboxsep{0pt}
+\setlength\fboxrule{0.25pt}
+\setlength{\abovedisplayskip}{3mm} %Abstand OBEN zw. Text und Formel
+\setlength{\belowdisplayskip}{3mm} %Abstand OBEN zw. Text und Formel
+\setlength\itemsep{0pt}
+\setlength\parindent{0pt}
+
+
+\mathleft
+
+\section*{Preliminaries}
+
+A special case of the Disintegration Theorem we need is the Following. 
+Throughout the talk we assume that all spaces are Polish. 
+\begin{theorem}{Disintegration for Product spaces}{}
+Let $X,Y$ be Polish, $p : X \times Y \rightarrow X$ the projection and $\pi \in \mathcal{P}(X \times Y)$. \\ 
+Setting $\mu \coloneqq p_{\#}(\pi)$ we get the existence of a paramatrized family of probability measures $\{\pi_x\}_{x \in X} \subset \mathcal{P}(X \times Y)$ such that
+\begin{enumerate}
+\item For all $A \in \mathcal{B}(X \times Y)$ the function $x \mapsto \pi_x(A)$ is measurable.
+\item $\pi(A) = \int_X \pi_x(A) d\mu(x)$ for all $A \in \mathcal{B}(X \times Y)$
+\item $\pi_x$ lives on $p^{-1}(x) = \{x\} \times Y$ for $\mu-\text{almost all } x \in X.$ This means that $\pi_x((X \times Y) \setminus p^{-1}(x)) = 0.$
+\end{enumerate} 
+\end{theorem}
+
+For the proof of the triangle inequality for the distance, we need the Gluing Lemma. 
+\begin{lemma}{Dudley/Gluing}{}
+Let $(X_1,\mu_1), (X_1,\mu_2),(X_1,\mu_3)$ be Polish and $\pi^{1,2} \in \Gamma(\mu_1,\mu_2)$ and $\pi^{2,3} \in \Gamma(\mu_2,\mu_3)$. 
+Then there exists some $\pi \in \mathcal{P}(X_1 \times X_2 \times X_3)$ such that $$p_{\#}^{1,2}(\pi) = \pi^{1,2} \quad \text{ and } \quad p_{\#}^{2,3}(\pi) = \pi^{2,3}$$ where $p^{1,2}(x_1,x_2,x_3) = (x_1,x_2)$ and $p^{2,3}(x_1,x_2,x_3) = (x_2,x_3).$ 
+\end{lemma}
+Proof: 
+\vspace{0.3cm} \\
+By the Disintegration Theorem, we have $$\pi^{1,2}(\mathrm{d}x_1,\mathrm{d}x_2)=\pi_{x_2}^{1,2}(\mathrm{d}x_1)\mu_2(\mathrm{d}x_2),\quad\pi^{2,3}(\mathrm{d}x_2,\mathrm{d}x_3)=\pi_{x_2}^{2,3}(\mathrm{d}x_3)\mu_2(\mathrm{d}x_2).$$ 
+Which in integral notation means for any measurable $f$ $$\int_{X_1 \times X_2} f(x_1,x_2) d\pi^{1,2}(x_1,x_2) = \int_{X_2} \int_{X_1} f(x_1,x_2) d\pi_{x_1}^{1,2}(x_1) d\mu_2(x_2).$$ and similar for $\pi^{2,3}$.
+
+Now, we "glue" both of those disintegrations together with $\mu_2$. Thus we define $$\pi:=\pi_{x_2}^{12}\times\pi_{x_2}^{23}(\mathrm{d}x_1,\mathrm{d}x_3)\mu_2(\mathrm{d}x_2)\in\mathcal{P}(X_1\times X_2\times X_3),$$ 
+which in integral notation now is $$\int_{X_1 \times X_2 \times X_3} f d\pi = \int_{X_2} \int_{X_1 \times X_3} f(x_1,x_2,x_3) d(\pi_{x_2}^{1,2} \times \pi_{x_2}^{2,3})(x_1,x_3) d\mu_2(x_2)$$
+\section*{Introduction to Wasserstein distance}
+
+As a reminder, we have the following space   
+$$\mathcal{P}_p(X) \coloneqq \left\{\mu \in \mathcal{P}(X) \mid \int_X d^p(x, x_0) \, \mathrm{d}\mu(x) < \infty \right\}$$ and the following will be a metric on this space. 
+
+\begin{definition}{Wasserstein distance}{}
+      For any $p \in [1,\infty[$ and $\nu,\mu \in \mathcal{P}_p(X)$
+      $$W_p^p(\mu,\nu) \coloneqq \min \left\{\int_{X\times X}d^p(x,y)\mathrm{d}\pi(x,y) \mid \pi\in\Gamma(\mu,\nu)\right\}.$$
+\end{definition}
+
+\begin{theorem}{Wasserstein distance is a metric}{}
+  For any $p \in [1,\infty[$ we have that $$(\mathcal{P}_p(X), W_p) \text{ is a metric space! }$$
+\end{theorem}
+
+Proof: 
+\vspace{0.3cm} \\
+We only proof $p = 2$, other $p$ are similar. \\
+Firstly, we show that $W_2$ maps to $\R$ and hence is always finite.
+For that, let $\mu,\nu \in  \mathcal{P}_2(X)$, then $\pi = \mu \times \nu$ is in $\Gamma(\mu,\nu)$ and we have for any metric $d$ that $$d^2(x,y) \leq (d(x,x_0)+d(x_0,y))^2 = d^2(x,x_0) + 2d(x,x_0)d(x_0,y)+d^2(x_0,y) \leq 2(d^2(x,x_0)+d^2(x_0,y))$$ because $2ab \leq a^2+b^2$ always. 
+Now, applying what we derived for $d$ in ! for some $x_0 \in X$, after inserting $\pi$ in $*$ we get
+\begin{align*}
+    W_2^2(\mu,\nu) &\overset{*}{\leq} \int_{X \times X} d^2(x,y) d\pi(x,y) \overset{!}{\leq} 2\int_{X \times X} d^2(x,x_0) d\pi(x,y) + 2\int_{X \times X} d^2(x_0,y) d\pi(x,y) \\
+    &= \int_X \int_X d^2(x,x_0) d\mu(x)d\nu(y) +  \int_X \int_X d^2(x_0,y) d\nu(y)d\mu(x) \\&= \int_X d^2(x,x_0) d\mu(x) + \int_X d^2(x_0,y) d\nu(y) < \infty
+\end{align*}
+where we used Fubini on the first line break and get the finiteness because $\mu,\nu \in \mathcal{P}_2(X)$. \\
+
+Now, assume that $\int_{X\times X} d^2 d\pi = 0$, which implies that $d^2(x,y) = 0 \Leftrightarrow x = y$ for $\pi$-almost all $(x,y) \in X\times X$. This implies that the optimal $\pi$ only lives on the diagonal $D = \{(x,x) \mid x \in X\}.$ Now, for any $\varphi \in C_b(X)$ we have $$\int_{X}\varphi(x)\mathrm{d}\mu(x)=\int_{X \times X}\varphi(x)\mathrm{d}\pi(x,y)=\int_{X \times X}\varphi(y)\mathrm{d}\pi(x,y) = \int_{X}\varphi(y)\mathrm{d}\nu(y)$$
+where the first/last equality holds with the definition of marginal and the change of variables formula. The middle one because $\pi$ lives on $D$. This shows $\mu = \nu$. \\
+\newpage
+Conversely, assume $\mu = \nu$, then, choose $\pi = (id \times id)_{\#}(\mu)$, which implies $$\int_{X \times X} d^2(x,y) d\pi(x,y) = \int_X d^2(x,x) d\mu(x) = 0$$ by the change of variables forumla $$\int_Y f(y) d(T_{\#}(\mu)) = \int_X f(T(x)) d\mu(x)$$ where in this case, $d^2 = f$, $T(x) = (id \times id)(x) = (x,x)$ and $Y = X\times X.$\\
+
+Now, for symmetry we have 
+\begin{align*}
+W_2^2(\mu,\nu) &= \int_{X \times X} d^2(x,y) d\pi(x,y) = \int_{X \times X} d^2(y,x) d\pi(x,y) =  \int_{X \times X} d^2(x,y) d\pi_{\#}(S)(x,y) = W_2^2(\nu,\mu)
+\end{align*}
+
+where S(x,y) = (y,x), the last equality holds, because $S$ swaps the marginals. \\
+
+Now, for the triangle inequality, take $\mu_1,\mu_2,\mu_3 \in \mathcal{P}_2(X).$ Let $\pi^{1,2}$ and $\pi^{2,3}$ be the optimal plans of the respective measures. Now, by the Gluing Lemma, we get some $\pi \in \mathcal{P}(X\times X\times X)$, let $\pi^{1,3}$ be the marginal of $\pi$ in the first and third coordinate.
+
+\begin{align*}W_2^2(\mu_1,\mu_3)
+  &\leq\left(\int_{X\times X}d^2(x_1,x_3)\mathrm{d}\pi^{1,3}(x_1,x_3)\right)
+  \\&\overset{!}{=}\left(\int_{X\times X\times X}d^2(x_1,x_3)\mathrm{d}\pi(x_1,x_2,x_3)\right)
+  \\&\leq \left(\int_{ X\times X\times X}\left[d(x_1,x_2)+d(x_2,x_3)\right]^2\mathrm{d}\pi(x_1,x_2,x_3)\right)
+  \\&\leq\left(\int_{X\times X \times X}d^2(x_1,x_2)\mathrm{d}\pi(x_1,x_2,x_3)\right)+\left(\int_{X\times X\times X}d^2(x_2,x_3)\mathrm{d}\pi(x_1,x_2,x_3)\right)
+  \\&\overset{!}{=}\left(\int_{X\times X}d^2(x_1,x_2)\mathrm{d}\pi^{1,2}(x_1,x_2)\right)+\left(\int_{X\times X}d^2(x_2,x_3)\mathrm{d}\pi^{2,3}(x_2,x_3)\right)
+  \\&=W^2_2(\mu_1,\mu_2)+W_2^2(\mu_2,\mu_3).
+\end{align*}
+
+where in !, we used the change of variables formula and the fact that we are working with marginals of $\pi$, which means that for example $\pi^{1,3} = p^{1,3}_{\#}(\pi)$. \\
+
+Firstly, we get that $$x \mapsto \delta_x \text{ is an isometry.}$$ 
+And, by the Kantorovich-Rubinstein Duality we have \begin{align*} W_1(\mu,\nu) &= \sup_{(\phi,\psi) \in I_c} \left\{ \int_X \phi d\mu + \int_X \psi d\nu \right\} \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu + \int_X \phi^c d\nu  \right\} 
+   = \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu - \int_X \phi d\nu  \right\} \end{align*}
+
+where the first equality actually holds for any $p$ distance, since $d^p$ is a continuous cost function. However, for the second and third equality we need that the cost function is exactly the metric, which is only the case for $d = c$. In that case, we get the the second equality because any $c$-concave function is $1$-Lipschitz, which then implies the third one because in that case $\phi^c = -\phi$.
+
+\section*{Examples for Wasserstein distance}
+Let $\nu \ll \lambda^n$ with Radon Nikodym derivative $f$ such that $\text{supp}(f) \subseteq \overline{B_1}$. \\ 
+Additionally, let $\mu_h \ll \lambda^n$ such that $f_h(x) = f(x+h)$. 
+Then we have $$\|f_h-f\|^2_{L^2(\mathbb{R}^n)} = 2\|f\|_{L^2(\mathbb{R}^n)}^2 \quad \text{ but on the other hand } \quad W_2(\mu_h,\mu) = \|h\|_2$$ which for large $\|h\|$ implies $$W_2(\mu_h,\mu) \gg \|f_h-f\|_{L^2(\mathbb{R}^n)}.$$ 
+In case of small $\|h\|$ we can also find $W_2(\mu_h,\mu) \ll \|f_h-f\|_{L^2(\mathbb{R}^n)}$.
+
+\bigbreak
+TODO DRAWING
+\bigbreak
+For any $\mu_X,\mu_Y \in \mathcal{P}_2(\mathbb{R}^d)$ with $\mathcal{L}(X) = \mu_X$ and $\mathcal{L}(Y) = \mu_Y$ where $X$ and $Y$ are normally distributed, 
+    the Wasserstein distance can be calculated as follows $$W_2(\mu_x,\mu_Y) = \|m_X-m_Y\|^2 + \text{tr}\left(\Sigma_X-2 \cdot \left(\Sigma_Y^{1/2}\Sigma_X\Sigma_Y^{1/2}\right)^{1/2}+\Sigma_Y\right)$$
+    If $\Sigma_X$ and $\Sigma_Y$ commute, this simplifies to $$W_2(\mu_x,\mu_Y) = \|m_X-m_Y\|^2 + \sum_{i = 1}^d \left( \sqrt{\lambda_i^X} - \sqrt{\lambda_i^Y}  \right)^2$$
+    where $\lambda_i^X$ and $\lambda_i^Y$ are the Eigenvalues of $\Sigma_X$ and $\Sigma_Y$ respectively. 
+
+\bigbreak
+TODO DRAWING
+
+
+If we restrict ourselves to $\mathcal{P}_\infty(X)$, the space of probability measures with bounded support. We can also define $W_\infty$ as the limit of $W_p$.
+\begin{align*}\lim_{p \to \infty} W_p(\mu,\nu) &= W_\infty(\mu,\nu) =\text{inf}\{\|d(x,y)\|_{L^\infty}(\pi) \mid \pi \in \Gamma(\mu,\nu)\} \\
+&= \underset{\pi \in \Gamma(\mu,\nu)}{\text{inf}}\text{inf}\{C \geq 0 \mid |d(x,y)| \leq C \text{ for } \pi \text{ almost all } (x,y)\} \end{align*} 
+and we have $$(\mathcal{P}_\infty(X), W_\infty) \text{ is a metric space}$$
+\newpage
+\section*{Lifting completeness}
+
+\end{document}
+
+
