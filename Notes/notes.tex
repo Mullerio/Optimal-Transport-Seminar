@@ -129,7 +129,7 @@ Then there exists some $\pi \in \mathcal{P}(X_1 \times X_2 \times X_3)$ such tha
 Proof: 
 \vspace{0.3cm} \\
 By the Disintegration Theorem, we have $$\pi^{1,2}(\mathrm{d}x_1,\mathrm{d}x_2)=\pi_{x_2}^{1,2}(\mathrm{d}x_1)\mu_2(\mathrm{d}x_2),\quad\pi^{2,3}(\mathrm{d}x_2,\mathrm{d}x_3)=\pi_{x_2}^{2,3}(\mathrm{d}x_3)\mu_2(\mathrm{d}x_2).$$ 
-Which in integral notation means for any measurable $f$ $$\int_{X_1 \times X_2} f(x_1,x_2) d\pi^{1,2}(x_1,x_2) = \int_{X_2} \int_{X_1} f(x_1,x_2) d\pi_{x_1}^{1,2}(x_1) d\mu_2(x_2).$$ and similar for $\pi^{2,3}$.
+Which in integral notation means for any bounded $f$ $$\int_{X_1 \times X_2} f(x_1,x_2) d\pi^{1,2}(x_1,x_2) = \int_{X_2} \int_{X_1} f(x_1,x_2) d\pi_{x_1}^{1,2}(x_1) d\mu_2(x_2).$$ and similar for $\pi^{2,3}$.
 
 Now, we "glue" both of those disintegrations together with $\mu_2$. Thus we define $$\pi:=\pi_{x_2}^{12}\times\pi_{x_2}^{23}(\mathrm{d}x_1,\mathrm{d}x_3)\mu_2(\mathrm{d}x_2)\in\mathcal{P}(X_1\times X_2\times X_3),$$ 
 which in integral notation now is $$\int_{X_1 \times X_2 \times X_3} f d\pi = \int_{X_2} \int_{X_1 \times X_3} f(x_1,x_2,x_3) d(\pi_{x_2}^{1,2} \times \pi_{x_2}^{2,3})(x_1,x_3) d\mu_2(x_2)$$
