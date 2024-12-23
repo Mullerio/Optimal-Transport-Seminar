@@ -184,6 +184,7 @@ Now, for the triangle inequality, take $\mu_1,\mu_2,\mu_3 \in \mathcal{P}_2(X).$
 
 where in !, we used the change of variables formula and the fact that we are working with marginals of $\pi$, which means that for example $\pi^{1,3} = p^{1,3}_{\#}(\pi)$. \\
 
+As some first basic properties we have the following two things. \\
 Firstly, we get that $$x \mapsto \delta_x \text{ is an isometry.}$$ 
 And, by the Kantorovich-Rubinstein Duality we have \begin{align*} W_1(\mu,\nu) &= \sup_{(\phi,\psi) \in I_c} \left\{ \int_X \phi d\mu + \int_X \psi d\nu \right\} \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu + \int_X \phi^c d\nu  \right\} 
    = \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu - \int_X \phi d\nu  \right\} \end{align*}
@@ -215,6 +216,58 @@ and we have $$(\mathcal{P}_\infty(X), W_\infty) \text{ is a metric space}$$
 \newpage
 \section*{Lifting completeness}
 
+To lift the completeness from a complete metric space $(X,d)$ to $(\mathcal{P}_p(X), W_p)$, we need a iterated version of the gluing Lemma.
+
+\begin{lemma}{Iterated Gluing/Dudley}{}
+  Let $N \geq 3$ and for any $n \leq N$ $(X_n,d_n)$ Polish, $\mu_n \in \mathcal{P}(X_n)$ and $\theta_n \in \Gamma(\mu_{n-1},\mu_n)$. \\ 
+  Then there exists $\pi_n \in \mathcal{P}(X_1\times ... \times X_n)$ for any $n \leq N$ such that.
+  \begin{enumerate}
+      \item $p^{1,...,n-1}_{\#} \pi_n = \pi_{n-1}$ for $2 \leq n \leq N$
+      \item $p^i_{\#} \pi_n = \mu_i$ for $1 \leq i \leq n \leq N$
+      \item $p^{i-1,i}_{\#} \pi_n = \theta_i$ for $2 \leq i\leq n \leq N$
+  \end{enumerate}
+\end{lemma}
+
+Proof: 
+\vspace{0.3cm} \\
+
+For $N = 3$ this is just the Dudley Lemma. In other cases, we iteratively ;) apply the Dudley Lemma in the following way. 
+
+$$X_1 \times X_2 \times ... \times X_n = Z_1 \times Z_2 \times Z_3, \quad Z_1 = (X_1 \times ... \times X_{n-2}), \quad Z_2 = X_{n-1}, \quad Z_3 = X_n.$$
+
+since we already have $\pi_{n-1} \in \mathcal{P}(Z_1 \times Z_2)$ and $\theta_n \in \Gamma(\mu_{n-1}, \mu_{n}) \subseteq \mathcal{P}(Z_2 \times Z_3)$ to get $\pi_n$. Note that this also works for $N = \infty$, in this case, the inequalities become strict for the three cases. \\
+TODO DRAWING
+
+\bigbreak
+
+We want to apply this Lemma in the setting that $X_i =X$ and $(\mu_n)$ is some sequence of measures on $X$. \\
+In this case we, by the Lemma, get a sequence of meaures $(\pi_n)$ from the Lemma. Now, we can (by for example Ionescu-Tulcea) get a measure on $\mathbb{X} = \prod_{i = 0}^\infty X$, so we have the following $$\pi_\infty \in \mathcal{P}(\mathbb{X}) \quad \text{ such that } \quad p^{1,...,n}_{\#}(\pi) = \pi_n.$$
+
+We will also need the metric version of the $L^p$ spaces.
+$$L^p(\Omega,\mathcal{F}, P, X) \coloneqq \left\{ f : \Omega \rightarrow X \mid f \text{ measurable }, \int_\Omega d^p(f,z_0) d P < \infty \right\}$$ with$$d_{L^p}^p(f,g) \coloneqq \int_\Omega d^p(f,g) dP$$
+These are not necessarily vector spaces, but one can show that this more general notion of $L^p$ space is still complete. (Which we will need in the following)
+
+\begin{theorem}{Lifting completeness from $X$ to $\mathcal{P}_p(X)$}{}
+  Let $(X,d)$ be a complete metric space, then $(\mathcal{P}_p(X), W_p)$ is complete.
+\end{theorem}
+
+Proof: 
+\vspace{0.3cm} \\
+We again only prove it for $p = 2$, the other cases are similar.  \\
+
+Let $(\mu_n)$ be a cauchy sequence in $\mathcal{P}_2(X)$ with respect to $W_2$. Now, applying our idea from above using the Iterated Dudley Lemma for $\mu_n$ with $X_i = X$ and $\theta_n \in \Gamma_o(\mu_n,\mu_{n+1})$.
+We thus get the above mentioned $\pi_\infty$ and by construction we have that the $\mu_n$ are the marginals of $\pi_\infty$. So we have $$p^n_{\#}(\pi) = \mu_n \quad (p_n,p_{n+1})_{\#}(\pi) = \theta_n.$$ 
+Now, the key observation is the following, we can, without loss of generality assume that $\sum\limits_{n = 0}^\infty W_2(\mu_n,\mu_{n+1})$ exists, 
+because we can always extract a subsequence such that this holds and because our sequence is cauchy, the limit of the subsequence has to be the limit of the enitre sequence. 
+The subsequence we might construct could be the following, given $n_k$ choose $n_{k+1}$ such that $$W_2(\mu_{n_k},\mu_{n_{k+1}}) < 2^{-k},$$ 
+which we can do because our sequence is Cauchy, then the series obviously converges.   
+Using this assumption, we can then deduce that  
+\begin{align*}\|p_n-p_{n+1}\|_{L^2(\pi_{\infty})} &= \int_\mathbb{X} d^2(p,p_{n+1}) d\pi_\infty \\ &= \int_{X \times X} d^2(x_n, x_{n+1}) d(p_n,p_{n+1})_{\#}(\pi_\infty) \\ &= \int_{X \times X} d^2(x_n,x_{n+1}) d\theta(x_n,x_{n+1}) = W_2^2(\mu_n,\mu_{n+1})\end{align*} 
+and thus the sequence of projections $(p_n)$ is Cauchy in $L^2(\mathbb{X},\mathcal{B}_\infty,\pi_\infty, X)$. Now, we know that $L^2$ is complete, let $p_\infty$ be the limit of $(p_n)$ and define $$\mu_\infty = (p_\infty)_{\#}(\pi_\infty).$$
+
+If we use what we had earlier in the Book, namely that $$S_{\#}P = \mu, \quad T_{\#}P = \nu \Rightarrow (S,T)_{\#}P \in \Gamma(\mu,\nu).$$ we get $$(p_n)_{\#}(\pi_\infty) = \mu_n, \quad (p_\infty)_{\#}(\pi_\infty) = \mu_\infty \Rightarrow (p_n,p_{\infty})_{\#}(\pi_\infty) \in \Gamma(\mu_n,\mu_\infty).$$
+and thus have \begin{align*}W_2^2(\mu_n,\mu_\infty) &\leq \int_{X \times X} d^2(x_n,x_{n+1}) d(p_n,p_\infty)_{\#}(\pi_\infty)(x_n,x_{n+1}) \\ &= \int_{\mathbb{X}} d^2(p_n,p_\infty) d\pi_\infty = \|p_n-p_\infty\|_{L^2(\pi_\infty)} \xrightarrow{n \to \infty} 0\end{align*} 
+which gives us $\mu_n \xrightarrow{W_2} \mu_\infty$ and the completeness of $(\mathcal{P}_2(X), W_2)$. 
 \end{document}
 
 
