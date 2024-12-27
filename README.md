@@ -1,1 +1,1 @@
-Cognitive Algorithms Seminar
+OT Seminar
