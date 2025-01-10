@@ -164,12 +164,22 @@ where the first/last equality holds with the definition of marginal and the chan
 \newpage
 Conversely, assume $\mu = \nu$, then, choose $\pi = (id \times id)_{\#}(\mu)$, which implies $$\int_{X \times X} d^2(x,y) d\pi(x,y) = \int_X d^2(x,x) d\mu(x) = 0$$ by the change of variables forumla $$\int_Y f(y) d(T_{\#}(\mu)) = \int_X f(T(x)) d\mu(x)$$ where in this case, $d^2 = f$, $T(x) = (id \times id)(x) = (x,x)$ and $Y = X\times X.$\\
 
-Now, for symmetry we have 
+Now, for symmetry we have if $\pi \in \Gamma(\mu,\nu)$ is optimal, that 
 \begin{align*}
-W_2^2(\mu,\nu) &= \int_{X \times X} d^2(x,y) d\pi(x,y) = \int_{X \times X} d^2(y,x) d\pi(x,y) =  \int_{X \times X} d^2(x,y) d\pi_{\#}(S)(x,y) = W_2^2(\nu,\mu)
+W_2^2(\mu,\nu) &= \int_{X \times X} d^2(x,y) d\pi(x,y) = \int_{X \times X} d^2(y,x) d\pi(x,y) =  \int_{X \times X} d^2(x,y) d\pi_{\#}(S)(x,y) \overset{!}{=} W_2^2(\nu,\mu)
 \end{align*}
 
-where S(x,y) = (y,x), the last equality holds, because $S$ swaps the marginals. \\
+where S(x,y) = (y,x). That the quality in (i) holds, is (to me at least) not trivial to show that, we will show that $\pi_{\#}(S)$ is optimal in $\Gamma(\nu,\mu)$.\\
+
+For that, assume that $\rho \in \Gamma(\nu,\mu)$ is some other Transport plan, similar to the above we have
+\begin{align*}
+  \int_{X \times X} d^2(x,y) d \pi(x,y) &\leq \int_{X \times X} d^2(x,y) d\rho_{\#}(S)(x,y)
+\end{align*} 
+
+Now we just look at the push forward of $S$ on both sides to get what we want, where we use that pushing twice by $S$ does nothing since $S \circ S = id$
+\begin{align*}
+  \int_{X \times X} d^2(x,y) d \pi_{\#}(S)(x,y) &\leq \int_{X \times X} d^2(x,y) d\rho(x,y) 
+\end{align*} 
 
 Now, for the triangle inequality, take $\mu_1,\mu_2,\mu_3 \in \mathcal{P}_2(X).$ Let $\pi^{1,2}$ and $\pi^{2,3}$ be the optimal plans of the respective measures. Now, by the Gluing Lemma, we get some $\pi \in \mathcal{P}(X\times X\times X)$, let $\pi^{1,3}$ be the marginal of $\pi$ in the first and third coordinate.
 
@@ -184,18 +194,32 @@ Now, for the triangle inequality, take $\mu_1,\mu_2,\mu_3 \in \mathcal{P}_2(X).$
 
 where in !, we used the change of variables formula and the fact that we are working with marginals of $\pi$, which means that for example $\pi^{1,3} = p^{1,3}_{\#}(\pi)$. \\
 
-As some first basic properties we have the following two things. \\
+
+\newpage
+Using what we have seen in eariliert meetings on OT Theory, we have the following two basic properties. \\
 Firstly, we get that $$x \mapsto \delta_x \text{ is an isometry.}$$ 
-And, by the Kantorovich-Rubinstein Duality we have \begin{align*} W_1(\mu,\nu) &= \sup_{(\phi,\psi) \in I_c} \left\{ \int_X \phi d\mu + \int_X \psi d\nu \right\} \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu + \int_X \phi^c d\nu  \right\} 
+
+This, we directly get, because $$d(x,y) = \int_{X \times X} d(a,y) d(\delta_x \otimes \delta_y)(a,b)$$ and the product measure $(\delta_x \otimes \delta_y)$ is the only measure that has $\delta_x,\delta_y$ as its marginals. \\
+
+Furthermore, by the Kantorovich-Rubinstein Duality we have \begin{align*} W_1(\mu,\nu) &= \sup_{(\phi,\psi) \in I_c} \left\{ \int_X \phi d\mu + \int_X \psi d\nu \right\} \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu + \int_X \phi^c d\nu  \right\} 
    = \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu - \int_X \phi d\nu  \right\} \end{align*}
 
-where the first equality actually holds for any $p$ distance, since $d^p$ is a continuous cost function. However, for the second and third equality we need that the cost function is exactly the metric, which is only the case for $d = c$. In that case, we get the the second equality because any $c$-concave function is $1$-Lipschitz, which then implies the third one because in that case $\phi^c = -\phi$.
+where the first equality actually holds for any $p$ distance, since $d^p$ is a continuous cost function. 
+However, for the second and third equality we need that the cost function is exactly the metric, which is only the case for $d = c$. 
+In that case, we get the the second equality because any $c$-concave function is $1$-Lipschitz, which then implies the third one because in that case $\phi^c = -\phi$.
+This Duality might be very useful in applications where computing this might be much easier than the minimization over Transport Plans. 
+
 
 \section*{Examples for Wasserstein distance}
-Let $\nu \ll \lambda^n$ with Radon Nikodym derivative $f$ such that $\text{supp}(f) \subseteq \overline{B_1}$. \\ 
-Additionally, let $\mu_h \ll \lambda^n$ such that $f_h(x) = f(x+h)$. 
-Then we have $$\|f_h-f\|^2_{L^2(\mathbb{R}^n)} = 2\|f\|_{L^2(\mathbb{R}^n)}^2 \quad \text{ but on the other hand } \quad W_2(\mu_h,\mu) = \|h\|_2$$ which for large $\|h\|$ implies $$W_2(\mu_h,\mu) \gg \|f_h-f\|_{L^2(\mathbb{R}^n)}.$$ 
-In case of small $\|h\|$ we can also find $W_2(\mu_h,\mu) \ll \|f_h-f\|_{L^2(\mathbb{R}^n)}$.
+Let $\nu \ll \lambda^n$ with Radon Nikodym derivative $f$ such that $\text{supp}(f) \subseteq \overline{B_1(0)}$. \\ 
+Additionally, let $\mu_h \ll \lambda^n$ and $f_h(x) = f(x+h)$ be its Radon Nikodym derivative. \\
+As a reminder, this means by the Theorem of Radon Nikodym that $$\mu(A) = \int_{A} f(x) d\lambda^n(x)$$ for some $A \in \mathcal{B}(\R^n)$ and simimarly for $f_h$. 
+Then we have for $\|h\| > 2$ that $supp(\mu_h) \cap supp(\mu) = \emptyset$ since $\overline{B_1(0)} \cap \overline{B_1(h)} = \emptyset$. Now, this gives us 
+$$\|f_h-f\|^2_{L^2(\mathbb{R}^n)} = \int_{\mathbb{R}^n} |f(x+h)-f(x)| d\lambda^n(x) =2\|f\|_{L^2(\mathbb{R}^n)}^2 $$
+but on the other hand $$W_2(\mu_h,\mu) = \int_{X\times X}d^2(x,y)\mathrm{d}\pi(x,y) = \int_{\R^n} d^2(x,T(x))  d\mu(x) = \int_{\R^n} |x-h+x| d\mu(x) = \|h\|_2$$ by the Brenier, Knott-Smith Theorem we saw in Meeting 5. 
+This Theorem, in this case, gives us that the solution to the Kantorovich Problem is unique and induced by a Transport Map $T$ which in this case is just the translation $T(x) = x+h$ since this is the gradient of the convex and differentiable function $\phi(x) = \frac{1}{2}\|x+h\|^2$ and we have $\mu = \mu_h \circ T^{-1}$. This for large $\|h\|$ implies $$W_2(\mu_h,\mu) \gg \|f_h-f\|_{L^2(\mathbb{R}^n)}.$$ 
+
+In case of small $\|h\|$ we can also find special $f$ such that $W_2(\mu_h,\mu) \ll \|f_h-f\|_{L^2(\mathbb{R}^n)}$. 
 
 \bigbreak
 TODO DRAWING
@@ -213,7 +237,8 @@ If we restrict ourselves to $\mathcal{P}_\infty(X)$, the space of probability me
 \begin{align*}\lim_{p \to \infty} W_p(\mu,\nu) &= W_\infty(\mu,\nu) =\text{inf}\{\|d(x,y)\|_{L^\infty}(\pi) \mid \pi \in \Gamma(\mu,\nu)\} \\
 &= \underset{\pi \in \Gamma(\mu,\nu)}{\text{inf}}\text{inf}\{C \geq 0 \mid |d(x,y)| \leq C \text{ for } \pi \text{ almost all } (x,y)\} \end{align*} 
 and we have $$(\mathcal{P}_\infty(X), W_\infty) \text{ is a metric space}$$
-\newpage
+\newpage 
+
 \section*{Lifting completeness}
 
 To lift the completeness from a complete metric space $(X,d)$ to $(\mathcal{P}_p(X), W_p)$, we need a iterated version of the gluing Lemma.
