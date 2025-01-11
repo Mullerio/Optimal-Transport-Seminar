@@ -195,8 +195,7 @@ Now, for the triangle inequality, take $\mu_1,\mu_2,\mu_3 \in \mathcal{P}_2(X).$
 where in !, we used the change of variables formula and the fact that we are working with marginals of $\pi$, which means that for example $\pi^{1,3} = p^{1,3}_{\#}(\pi)$. \\
 
 
-\newpage
-Using what we have seen in eariliert meetings on OT Theory, we have the following two basic properties. \\
+Using what we have seen in earilier meetings on OT Theory, we have the following two basic properties. \\
 Firstly, we get that $$x \mapsto \delta_x \text{ is an isometry.}$$ 
 
 This, we directly get, because $$d(x,y) = \int_{X \times X} d(a,y) d(\delta_x \otimes \delta_y)(a,b)$$ and the product measure $(\delta_x \otimes \delta_y)$ is the only measure that has $\delta_x,\delta_y$ as its marginals. \\
@@ -211,33 +210,44 @@ This Duality might be very useful in applications where computing this might be 
 
 
 \section*{Examples for Wasserstein distance}
-Let $\nu \ll \lambda^n$ with Radon Nikodym derivative $f$ such that $\text{supp}(f) \subseteq \overline{B_1(0)}$. \\ 
+Let $\mu \ll \lambda^n$ with Radon Nikodym derivative $f$ such that $\text{supp}(f) \subseteq \overline{B_1(0)}$. \\ 
 Additionally, let $\mu_h \ll \lambda^n$ and $f_h(x) = f(x+h)$ be its Radon Nikodym derivative. \\
 As a reminder, this means by the Theorem of Radon Nikodym that $$\mu(A) = \int_{A} f(x) d\lambda^n(x)$$ for some $A \in \mathcal{B}(\R^n)$ and simimarly for $f_h$. 
-Then we have for $\|h\| > 2$ that $supp(\mu_h) \cap supp(\mu) = \emptyset$ since $\overline{B_1(0)} \cap \overline{B_1(h)} = \emptyset$. Now, this gives us 
+Then we have for $\|h\| > 2$ that $supp(\mu_h) \cap supp(\mu) = \emptyset$ since $\overline{B_1(0)} \cap \overline{B_1(h)} = \emptyset$. 
+\begin{center}
+  \includegraphics*[width=0.5\textwidth]{BALL.png}  
+\end{center}
+
+Now, this gives us 
 $$\|f_h-f\|^2_{L^2(\mathbb{R}^n)} = \int_{\mathbb{R}^n} |f(x+h)-f(x)| d\lambda^n(x) =2\|f\|_{L^2(\mathbb{R}^n)}^2 $$
 but on the other hand $$W_2(\mu_h,\mu) = \int_{X\times X}d^2(x,y)\mathrm{d}\pi(x,y) = \int_{\R^n} d^2(x,T(x))  d\mu(x) = \int_{\R^n} |x-h+x| d\mu(x) = \|h\|_2$$ by the Brenier, Knott-Smith Theorem we saw in Meeting 5. 
 This Theorem, in this case, gives us that the solution to the Kantorovich Problem is unique and induced by a Transport Map $T$ which in this case is just the translation $T(x) = x+h$ since this is the gradient of the convex and differentiable function $\phi(x) = \frac{1}{2}\|x+h\|^2$ and we have $\mu = \mu_h \circ T^{-1}$. This for large $\|h\|$ implies $$W_2(\mu_h,\mu) \gg \|f_h-f\|_{L^2(\mathbb{R}^n)}.$$ 
 
-In case of small $\|h\|$ we can also find special $f$ such that $W_2(\mu_h,\mu) \ll \|f_h-f\|_{L^2(\mathbb{R}^n)}$. 
+In the case of small $\|h\|$ we can also find special $f$ such that $W_2(\mu_h,\mu) \ll \|f_h-f\|_{L^2(\mathbb{R}^n)}$. 
 
-\bigbreak
-TODO DRAWING
 \bigbreak
 For any $\mu_X,\mu_Y \in \mathcal{P}_2(\mathbb{R}^d)$ with $\mathcal{L}(X) = \mu_X$ and $\mathcal{L}(Y) = \mu_Y$ where $X$ and $Y$ are normally distributed, 
-    the Wasserstein distance can be calculated as follows $$W_2(\mu_x,\mu_Y) = \|m_X-m_Y\|^2 + \text{tr}\left(\Sigma_X-2 \cdot \left(\Sigma_Y^{1/2}\Sigma_X\Sigma_Y^{1/2}\right)^{1/2}+\Sigma_Y\right)$$
-    If $\Sigma_X$ and $\Sigma_Y$ commute, this simplifies to $$W_2(\mu_x,\mu_Y) = \|m_X-m_Y\|^2 + \sum_{i = 1}^d \left( \sqrt{\lambda_i^X} - \sqrt{\lambda_i^Y}  \right)^2$$
-    where $\lambda_i^X$ and $\lambda_i^Y$ are the Eigenvalues of $\Sigma_X$ and $\Sigma_Y$ respectively. 
+the Wasserstein distance can be calculated as follows $$W_2(\mu_x,\mu_Y) = \|m_X-m_Y\|_2^2 + \text{tr}\left(\Sigma_X-2 \cdot \left(\Sigma_Y^{1/2}\Sigma_X\Sigma_Y^{1/2}\right)^{1/2}+\Sigma_Y\right)$$
+If $\Sigma_X$ and $\Sigma_Y$ commute, this simplifies to $$W_2(\mu_x,\mu_Y) = \|m_X-m_Y\|_2^2 + \sum_{i = 1}^d \left( \sqrt{\lambda_i^X} - \sqrt{\lambda_i^Y}  \right)^2$$
+where $\lambda_i^X$ and $\lambda_i^Y$ are the Eigenvalues of $\Sigma_X$ and $\Sigma_Y$ respectively. 
 
+As an example, let us take a look at $\Sigma_X = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}$ and $\Sigma_Y = \begin{pmatrix}\frac{1}{2} & \frac{1}{3} \\ \frac{1}{3} & \frac{1}{2} \end{pmatrix}$ 
+with $m_X = \begin{pmatrix}0 \\ 0 \end{pmatrix}$ and $m_Y = \begin{pmatrix}2 \\ 2 \end{pmatrix}$. This looks like the following, where a darker colored area indicates more mass to be concentrated there. 
+
+
+\begin{center}
+  \includegraphics*[width=0.6\textwidth]{Wasserstein.png}  
+\end{center}
+
+We can also calculate this ourselves, we directly get since $\lambda^2 - \lambda + \frac{5}{36}$ is the char polynomial. $$W_2^2(\mu_Y,\mu_X) = \left\|\begin{pmatrix}
+  2 \\ 2
+\end{pmatrix}\right\|_2^2 + \left(1-\sqrt{\frac{5}{6}}\right)^2 + \left(1-\sqrt{\frac{1}{6}}\right)^2 = 8 +\left(1-\sqrt{\frac{5}{6}}\right)^2 + \left(1-\sqrt{\frac{1}{6}}\right)^2 \approx 8.358$$
 \bigbreak
-TODO DRAWING
-
 
 If we restrict ourselves to $\mathcal{P}_\infty(X)$, the space of probability measures with bounded support. We can also define $W_\infty$ as the limit of $W_p$.
 \begin{align*}\lim_{p \to \infty} W_p(\mu,\nu) &= W_\infty(\mu,\nu) =\text{inf}\{\|d(x,y)\|_{L^\infty}(\pi) \mid \pi \in \Gamma(\mu,\nu)\} \\
 &= \underset{\pi \in \Gamma(\mu,\nu)}{\text{inf}}\text{inf}\{C \geq 0 \mid |d(x,y)| \leq C \text{ for } \pi \text{ almost all } (x,y)\} \end{align*} 
 and we have $$(\mathcal{P}_\infty(X), W_\infty) \text{ is a metric space}$$
-\newpage 
 
 \section*{Lifting completeness}
 
