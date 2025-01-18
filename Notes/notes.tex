@@ -155,21 +155,23 @@ For that, let $\mu,\nu \in  \mathcal{P}_2(X)$, then $\pi = \mu \times \nu$ is in
 Now, applying what we derived for $d$ in ! for some $x_0 \in X$, after inserting $\pi$ in $*$ we get
 \begin{align*}
     W_2^2(\mu,\nu) &\overset{*}{\leq} \int_{X \times X} d^2(x,y) d\pi(x,y) \overset{!}{\leq} 2\int_{X \times X} d^2(x,x_0) d\pi(x,y) + 2\int_{X \times X} d^2(x_0,y) d\pi(x,y) \\
-    &= \int_X \int_X d^2(x,x_0) d\mu(x)d\nu(y) +  \int_X \int_X d^2(x_0,y) d\nu(y)d\mu(x) \\&= \int_X d^2(x,x_0) d\mu(x) + \int_X d^2(x_0,y) d\nu(y) < \infty
+    &= 2\int_X \int_X d^2(x,x_0) d\mu(x)d\nu(y) + 2\int_X \int_X d^2(x_0,y) d\nu(y)d\mu(x) \\&= 2\int_X d^2(x,x_0) d\mu(x) + 2\int_X d^2(x_0,y) d\nu(y) < \infty
 \end{align*}
 where we used Fubini on the first line break and get the finiteness because $\mu,\nu \in \mathcal{P}_2(X)$. \\
 
-Now, assume that $\int_{X\times X} d^2 d\pi = 0$, which implies that $d^2(x,y) = 0 \Leftrightarrow x = y$ for $\pi$-almost all $(x,y) \in X\times X$. This implies that the optimal $\pi$ only lives on the diagonal $D = \{(x,x) \mid x \in X\}.$ Now, for any $\varphi \in C_b(X)$ we have $$\int_{X}\varphi(x)\mathrm{d}\mu(x)=\int_{X \times X}\varphi(x)\mathrm{d}\pi(x,y)=\int_{X \times X}\varphi(y)\mathrm{d}\pi(x,y) = \int_{X}\varphi(y)\mathrm{d}\nu(y)$$
+Now, assume that $\int_{X\times X} d^2 d\pi = 0$, which implies that $d^2(x,y) = 0 \Leftrightarrow x = y$ for $\pi$-almost all $(x,y) \in X\times X$. This implies that the optimal $\pi$ only lives on the diagonal $D = \{(x,x) \mid x \in X\}.$ Now, for any $\varphi \in C_0(X)$ we have $$\int_{X}\varphi(x)\mathrm{d}\mu(x)=\int_{X \times X}\varphi(x)\mathrm{d}\pi(x,y)=\int_{X \times X}\varphi(y)\mathrm{d}\pi(x,y) = \int_{X}\varphi(y)\mathrm{d}\nu(y)$$
 where the first/last equality holds with the definition of marginal and the change of variables formula. The middle one because $\pi$ lives on $D$. This shows $\mu = \nu$. \\
 \newpage
-Conversely, assume $\mu = \nu$, then, choose $\pi = (id \times id)_{\#}(\mu)$, which implies $$\int_{X \times X} d^2(x,y) d\pi(x,y) = \int_X d^2(x,x) d\mu(x) = 0$$ by the change of variables forumla $$\int_Y f(y) d(T_{\#}(\mu)) = \int_X f(T(x)) d\mu(x)$$ where in this case, $d^2 = f$, $T(x) = (id \times id)(x) = (x,x)$ and $Y = X\times X.$\\
+Conversely, assume $\mu = \nu$, then, choose $\pi = (id \times id)_{\#}(\mu)$, 
+which implies $$\int_{X \times X} d^2(x,y) d\pi(x,y) = \int_X d^2(x,x) d\mu(x) = 0$$ by the change of variables forumla 
+$$\int_Y f(y) d(T_{\#}(\mu)) = \int_X f(T(x)) d\mu(x)$$ where in this case, $d^2 = f$, $T(x) = (id \times id)(x) = (x,x)$ and $Y = X\times X.$\\
 
 Now, for symmetry we have if $\pi \in \Gamma(\mu,\nu)$ is optimal, that 
 \begin{align*}
 W_2^2(\mu,\nu) &= \int_{X \times X} d^2(x,y) d\pi(x,y) = \int_{X \times X} d^2(y,x) d\pi(x,y) =  \int_{X \times X} d^2(x,y) d\pi_{\#}(S)(x,y) \overset{!}{=} W_2^2(\nu,\mu)
 \end{align*}
 
-where S(x,y) = (y,x). That the quality in (i) holds, is (to me at least) not trivial to show that, we will show that $\pi_{\#}(S)$ is optimal in $\Gamma(\nu,\mu)$.\\
+where S(x,y) = (y,x). That the quality in (!) holds, is (to me at least) not trivial to show that, we will show that $\pi_{\#}(S)$ is optimal in $\Gamma(\nu,\mu)$.\\
 
 For that, assume that $\rho \in \Gamma(\nu,\mu)$ is some other Transport plan, similar to the above we have
 \begin{align*}
@@ -183,16 +185,17 @@ Now we just look at the push forward of $S$ on both sides to get what we want, w
 
 Now, for the triangle inequality, take $\mu_1,\mu_2,\mu_3 \in \mathcal{P}_2(X).$ Let $\pi^{1,2}$ and $\pi^{2,3}$ be the optimal plans of the respective measures. Now, by the Gluing Lemma, we get some $\pi \in \mathcal{P}(X\times X\times X)$, let $\pi^{1,3}$ be the marginal of $\pi$ in the first and third coordinate.
 
-\begin{align*}W_2^2(\mu_1,\mu_3)
-  &\leq\left(\int_{X\times X}d^2(x_1,x_3)\mathrm{d}\pi^{1,3}(x_1,x_3)\right)
-  \\&\overset{!}{=}\left(\int_{X\times X\times X}d^2(x_1,x_3)\mathrm{d}\pi(x_1,x_2,x_3)\right)
-  \\&\leq \left(\int_{ X\times X\times X}\left[d(x_1,x_2)+d(x_2,x_3)\right]^2\mathrm{d}\pi(x_1,x_2,x_3)\right)
-  \\&\leq\left(\int_{X\times X \times X}d^2(x_1,x_2)\mathrm{d}\pi(x_1,x_2,x_3)\right)+\left(\int_{X\times X\times X}d^2(x_2,x_3)\mathrm{d}\pi(x_1,x_2,x_3)\right)
-  \\&\overset{!}{=}\left(\int_{X\times X}d^2(x_1,x_2)\mathrm{d}\pi^{1,2}(x_1,x_2)\right)+\left(\int_{X\times X}d^2(x_2,x_3)\mathrm{d}\pi^{2,3}(x_2,x_3)\right)
-  \\&=W^2_2(\mu_1,\mu_2)+W_2^2(\mu_2,\mu_3).
+\begin{align*}W_2(\mu_1,\mu_3)
+  &\leq\left(\int_{X\times X}d^2(x_1,x_3)\mathrm{d}\pi^{1,3}(x_1,x_3)\right)^{1/2}
+  \\&\overset{!}{=}\left(\int_{X\times X\times X}d^2(x_1,x_3)\mathrm{d}\pi(x_1,x_2,x_3)\right)^{1/2}
+  \\&\leq \left(\int_{ X\times X\times X}\left[d(x_1,x_2)+d(x_2,x_3)\right]^2\mathrm{d}\pi(x_1,x_2,x_3)\right)^{1/2}
+  \\&\overset{*}{\leq}\left(\int_{X\times X \times X}d^2(x_1,x_2)\mathrm{d}\pi(x_1,x_2,x_3)\right)^{1/2}+\left(\int_{X\times X\times X}d^2(x_2,x_3)\mathrm{d}\pi(x_1,x_2,x_3)\right)^{1/2}
+  \\&\overset{!}{=}\left(\int_{X\times X}d^2(x_1,x_2)\mathrm{d}\pi^{1,2}(x_1,x_2)\right)^{1/2}+\left(\int_{X\times X}d^2(x_2,x_3)\mathrm{d}\pi^{2,3}(x_2,x_3)\right)^{1/2}
+  \\&=W^2(\mu_1,\mu_2)+W_2(\mu_2,\mu_3).
 \end{align*}
 
-where in !, we used the change of variables formula and the fact that we are working with marginals of $\pi$, which means that for example $\pi^{1,3} = p^{1,3}_{\#}(\pi)$. \\
+where in !, we used the change of variables formula and the fact that we are working with marginals of $\pi$, which means that for example $\pi^{1,3} = p^{1,3}_{\#}(\pi)$. 
+In $*$ we used the Minkowski inequality for $f(x_1,x_2,x_3) = d(x_1,x_2)$ and $g(x_1,x_2,x_3) = d(x_2,x_3)$ respectively, both of these are in $L^2(X \times X \times X,\pi)$ by the finiteness we proved. \\
 
 
 Using what we have seen in earilier meetings on OT Theory, we have the following two basic properties. \\
@@ -232,7 +235,8 @@ If $\Sigma_X$ and $\Sigma_Y$ commute, this simplifies to $$W_2(\mu_x,\mu_Y) = \|
 where $\lambda_i^X$ and $\lambda_i^Y$ are the Eigenvalues of $\Sigma_X$ and $\Sigma_Y$ respectively. 
 
 As an example, let us take a look at $\Sigma_X = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}$ and $\Sigma_Y = \begin{pmatrix}\frac{1}{2} & \frac{1}{3} \\ \frac{1}{3} & \frac{1}{2} \end{pmatrix}$ 
-with $m_X = \begin{pmatrix}0 \\ 0 \end{pmatrix}$ and $m_Y = \begin{pmatrix}2 \\ 2 \end{pmatrix}$. This looks like the following, where a darker colored area indicates more mass to be concentrated there. 
+with $m_X = \begin{pmatrix}0 \\ 0 \end{pmatrix}$ and $m_Y = \begin{pmatrix}2 \\ 2 \end{pmatrix}$. 
+This looks like the following, where a darker colored area indicates more mass to be concentrated there. 
 
 
 \begin{center}
@@ -300,9 +304,12 @@ Using this assumption, we can then deduce that
 \begin{align*}\|p_n-p_{n+1}\|_{L^2(\pi_{\infty})} &= \int_\mathbb{X} d^2(p,p_{n+1}) d\pi_\infty \\ &= \int_{X \times X} d^2(x_n, x_{n+1}) d(p_n,p_{n+1})_{\#}(\pi_\infty) \\ &= \int_{X \times X} d^2(x_n,x_{n+1}) d\theta(x_n,x_{n+1}) = W_2^2(\mu_n,\mu_{n+1})\end{align*} 
 and thus the sequence of projections $(p_n)$ is Cauchy in $L^2(\mathbb{X},\mathcal{B}_\infty,\pi_\infty, X)$. Now, we know that $L^2$ is complete, let $p_\infty$ be the limit of $(p_n)$ and define $$\mu_\infty = (p_\infty)_{\#}(\pi_\infty).$$
 
-If we use what we had earlier in the Book, namely that $$S_{\#}P = \mu, \quad T_{\#}P = \nu \Rightarrow (S,T)_{\#}P \in \Gamma(\mu,\nu).$$ we get $$(p_n)_{\#}(\pi_\infty) = \mu_n, \quad (p_\infty)_{\#}(\pi_\infty) = \mu_\infty \Rightarrow (p_n,p_{\infty})_{\#}(\pi_\infty) \in \Gamma(\mu_n,\mu_\infty).$$
-and thus have \begin{align*}W_2^2(\mu_n,\mu_\infty) &\leq \int_{X \times X} d^2(x_n,x_{n+1}) d(p_n,p_\infty)_{\#}(\pi_\infty)(x_n,x_{n+1}) \\ &= \int_{\mathbb{X}} d^2(p_n,p_\infty) d\pi_\infty = \|p_n-p_\infty\|_{L^2(\pi_\infty)} \xrightarrow{n \to \infty} 0\end{align*} 
-which gives us $\mu_n \xrightarrow{W_2} \mu_\infty$ and the completeness of $(\mathcal{P}_2(X), W_2)$. 
+Note than in the above there is a error in the Book, namely they integrate over $\mathbb{X}$ in the Integral over the push forward $(p_n,p_{n+1})_{\#}(\pi)$ which does not make sense. \\ 
+
+To finish the prove, we now use what we had earlier in the Book, namely that $$S_{\#}P = \mu, \quad T_{\#}P = \nu \Rightarrow (S,T)_{\#}P \in \Gamma(\mu,\nu).$$ 
+and thus we get $$(p_n)_{\#}(\pi_\infty) = \mu_n, \quad (p_\infty)_{\#}(\pi_\infty) = \mu_\infty \Rightarrow (p_n,p_{\infty})_{\#}(\pi_\infty) \in \Gamma(\mu_n,\mu_\infty).$$
+which implies \begin{align*}W_2^2(\mu_n,\mu_\infty) &\leq \int_{X \times X} d^2(x_n,x_{n+1}) d(p_n,p_\infty)_{\#}(\pi_\infty)(x_n,x_{n+1}) \\ &= \int_{\mathbb{X}} d^2(p_n,p_\infty) d\pi_\infty = \|p_n-p_\infty\|_{L^2(\pi_\infty)} \xrightarrow{n \to \infty} 0\end{align*} 
+which gives us $\mu_n \xrightarrow{W_2} \mu_\infty$ and the completeness of $(\mathcal{P}_2(X), W_2)$. \\
 \end{document}
 
 

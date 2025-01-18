@@ -14,6 +14,21 @@
 \usepackage{xcolor}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
+\usepackage{comment}
+
+
+\newtheoremstyle{reminder}% Custom style for reminders
+  {3pt} % Space above
+  {3pt} % Space below
+  {\itshape} % Body font
+  {} % Indent amount
+  {\bfseries\color{blue}} % Theorem head font
+  {.} % Punctuation after theorem head
+  {.5em} % Space after theorem head
+  {} % Theorem head spec (can be left empty, meaning `normal`)
+
+\theoremstyle{reminder}
+\newtheorem{reminder}{Reminder}
 
 
 \author[Jonas Müller]{Jonas Müller}
@@ -33,17 +48,17 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%% Outline %%%%%%%%%%%%%%%%%%%%%
-\section{Preliminaries}
-\subsection{Disintegration Theorem}
-\subsection{Dudley Lemma}
 \section{A metric for probabilites?}
 \subsection{The Wasserstein distance}
-\subsection{Applying what we know to the Wasserstein distance}
+\subsection{Dudley Lemma}
 \subsection{Comparing $L^2$ norm and Wasserstein distance}
 \subsection{Wasserstein for normal distributions}
 
 \section{Lifting completeness from $X$ to $\mathcal{P}_p(X)$}
 \subsection{Iterated Dudley Lemma}
+\section{Some things in case time permits}
+\subsection{Wasserstein $\infty$ metric}
+\subsection{Some other properties of the Wasserstein metric}
 % table of contents 
 \begin{frame}
     \frametitle{Outline}
@@ -54,7 +69,7 @@
 
 %%%%%%%%%%%%%%%%%% Beginning of slides %%%%%%%%%%%%%%%%%
 
-
+\begin{comment}
 \begin{frame}{The Disintegration Theorem for Product Spaces}
     A special case of the Disintegration Theorem we need is the Following. Throughout the talk we assume that all spaces are Polish. 
     \begin{theorem}
@@ -67,17 +82,8 @@
          \end{enumerate} 
     \end{theorem}
 \end{frame}
+\end{comment}
 
-\begin{frame}{The Dudley Lemma}
-    In the Literature this is often called Gluing Lemma!
-
-    \begin{lemma}
-        Let $(X_1,\mu_1), (X_1,\mu_2),(X_1,\mu_3)$ be Polish and $\pi^{1,2} \in \Gamma(\mu_1,\mu_2)$ and $\pi^{2,3} \in \Gamma(\mu_2,\mu_3)$. 
-        Then there exists some $\pi \in \mathcal{P}(X_1 \times X_2 \times X_3)$ such that $$p_{\#}^{1,2}(\pi) = \pi^{1,2} \quad \text{ and } \quad p_{\#}^{2,3}(\pi) = \pi^{2,3}$$ where $p^{1,2}(x_1,x_2,x_3) = (x_1,x_2)$ and $p^{2,3}(x_1,x_2,x_3) = (x_2,x_3).$ 
-    \end{lemma}
-
-    Proof is essentially just taking the product measures of the Disintegration's of $\pi^{2,3}$ and $\pi^{1,2}$ and "Gluing" them together with $\mu_2$. 
-\end{frame}
 
 
 \begin{frame}{The Wasserstein distance for finite $p$} 
@@ -92,11 +98,47 @@
     \end{theorem}
 \end{frame}
 
-\begin{frame}{What do we already know about this distance?}
-    Firstly, we get that $$x \mapsto \delta_x \text{ is an isometry.}$$ 
-    And, by the Kantorovich-Rubinstein Duality we have \begin{align*} W_1(\mu,\nu) &= \sup_{(\phi,\psi) \in I_c} \left\{ \int_X \phi d\mu + \int_X \psi d\nu \right\} \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu + \int_X \phi^c d\nu  \right\} 
-       \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu - \int_X \phi d\nu  \right\} \end{align*}
+\begin{frame}{Proof of Theorem}
+    We assume $p = 2$, which makes it less messy, the other cases are similar.
+    \bigbreak
+    \begin{enumerate}
+        \item $W_2(\mu, \nu) < \infty$ always
+        \item $\mu = \nu \Leftrightarrow W_2(\mu,\nu) = 0$
+        \item $W_2(\mu,\nu) = W_2(\nu, \mu)$
+        \item Dudley Lemma for triangle inequality
+        \item $W_2(\mu_1,\mu_3) \leq W_2(\mu_1,\mu_2) + W_2(\mu_2,\mu_3).$
+    \end{enumerate}
+    \begin{reminder}
+        Let \( T: X \to Y \) be a measurable function and let $\mu,\nu$ be measures on $X,Y$, then we have the Change of Variables Formula:
+        $$\int_Y f(y) \, d(T_{\#}\mu)(y) = \int_X f(T(x)) \, d\mu(x).$$
+        Additionally, for any metric $d$ on $X$ it holds for any $x_0 \in X$ that $$d^2(x,y) \leq (d(x,x_0)+d(x_0,y))^2 \leq 2(d^2(x,x_0)+d^2(x_0,y))$$ because $2ab \leq a^2+b^2$ always.
+    \end{reminder}
 \end{frame}
+
+\begin{frame}{The Dudley Lemma}
+    In the Literature this is often called Gluing Lemma!
+
+    \begin{lemma}
+        Let $(X_1,\mu_1), (X_1,\mu_2),(X_1,\mu_3)$ be Polish and $\pi^{1,2} \in \Gamma(\mu_1,\mu_2)$ and $\pi^{2,3} \in \Gamma(\mu_2,\mu_3)$. 
+        Then there exists some $\pi \in \mathcal{P}(X_1 \times X_2 \times X_3)$ such that $$p_{\#}^{1,2}(\pi) = \pi^{1,2} \quad \text{ and } \quad p_{\#}^{2,3}(\pi) = \pi^{2,3}$$ where $p^{1,2}(x_1,x_2,x_3) = (x_1,x_2)$ and $p^{2,3}(x_1,x_2,x_3) = (x_2,x_3).$ 
+    \end{lemma}
+
+    Proof is essentially just taking the product measures of the Disintegration's of $\pi^{2,3}$ and $\pi^{1,2}$ and "Gluing" them together with $\mu_2$. 
+\end{frame}
+
+\begin{frame}{Triangle inequality}
+    Let $\mu_1,\mu_2,\mu_3 \in \mathcal{P}(X)$, $\pi^{1,2}$ and $\pi^{2,3}$ be optimal. 
+    Let $\pi \in \mathcal{P}(X\times X\times X)$ be the measure from Dudley and $p^{1,3}_{\#}(\pi) = \pi^{1,3} \in \Gamma(\mu_1,\mu_3).$ 
+    \begin{align*}&W_2(\mu_1,\mu_3) 
+        \leq\left(\int_{X\times X}d^2(x_1,x_3)\mathrm{d}\pi^{1,3}(x_1,x_3)\right)^{1/2} 
+        \\&\uncover<2->{\overset{!}{=}\left(\int_{X\times X\times X}d^2(x_1,x_3)\mathrm{d}\pi(x_1,x_2,x_3)\right)^{1/2}}
+        \\&\uncover<3->{\leq \left(\int_{ X\times X\times X}\left[d(x_1,x_2)+d(x_2,x_3)\right]^2\mathrm{d}\pi(x_1,x_2,x_3)\right)^{1/2}}
+        \\&\uncover<4->{\overset{*}{\leq}\left(\int_{X\times X \times X}d^2(x_1,x_2)\mathrm{d}\pi(x_1,x_2,x_3)\right)^{1/2}+\left(\int_{X\times X\times X}d^2(x_2,x_3)\mathrm{d}\pi(x_1,x_2,x_3)\right)^{1/2}}
+        \\&\uncover<5->{\overset{!}{=}\left(\int_{X\times X}d^2(x_1,x_2)\mathrm{d}\pi^{1,2}(x_1,x_2)\right)^{1/2}+\left(\int_{X\times X}d^2(x_2,x_3)\mathrm{d}\pi^{2,3}(x_2,x_3)\right)^{1/2}}
+        \\&\uncover<6->{=W_2(\mu_1,\mu_2)+W_2(\mu_2,\mu_3)}.
+      \end{align*}
+\end{frame}
+
 
 
 \begin{frame}{Comparing $L^2$ norm and Wasserstein distance}
@@ -113,18 +155,12 @@
 \end{frame}
 
 \begin{frame}{Normally distributed examples}
-    
-    
-
+    Assume $\Sigma_X = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}$ and $\Sigma_Y = \begin{pmatrix}\frac{1}{2} & \frac{1}{3} \\ \frac{1}{3} & \frac{1}{2} \end{pmatrix}$ 
+with $m_X = \begin{pmatrix}0 \\ 0 \end{pmatrix}$ and $m_Y = \begin{pmatrix}2 \\ 2 \end{pmatrix}$. 
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{images/Wasserstein.png}  
+\end{center}
 \end{frame}
-
-\begin{frame}{Wasserstein distance for $p = \infty$}
-    If we restrict ourselves to $\mathcal{P}_\infty(X)$, the space of probability measures with bounded support. We can also define $W_\infty$ as the limit of $W_p$.
-    \begin{align*}\lim_{p \to \infty} W_p(\mu,\nu) &= W_\infty(\mu,\nu) =\text{inf}\{\|d(x,y)\|_{L^\infty}(\pi) \mid \pi \in \Gamma(\mu,\nu)\} \\
-    &= \underset{\pi \in \Gamma(\mu,\nu)}{\text{inf}}\text{inf}\{C \geq 0 \mid |d(x,y)| \leq C \text{ for } \pi \text{ almost all } (x,y)\} \end{align*} 
-    and we have $$(\mathcal{P}_\infty(X), W_\infty) \text{ is a metric space}$$ 
-\end{frame}
-
 
 
 
@@ -153,6 +189,22 @@
         Let $(X,d)$ be a complete metric space, then $(\mathcal{P}_p(X), W_p)$ is complete.
     \end{theorem}
 \end{frame}
+
+
+\begin{frame}{Duality for the Wasserstein Distance}
+    By the Kantorovich-Rubinstein Duality we have \begin{align*} W_1(\mu,\nu) &= \sup_{(\phi,\psi) \in I_c} \left\{ \int_X \phi d\mu + \int_X \psi d\nu \right\} \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu + \int_X \phi^c d\nu  \right\} 
+       \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu - \int_X \phi d\nu  \right\} \end{align*}
+       where the first equality holds for any $W_p$ distance, the latter need that $c = d$.
+\end{frame}
+
+
+\begin{frame}{Wasserstein distance for $p = \infty$}
+    If we restrict ourselves to $\mathcal{P}_\infty(X)$, the space of probability measures with bounded support. We can also define $W_\infty$ as the limit of $W_p$.
+    \begin{align*}\lim_{p \to \infty} W_p(\mu,\nu) &= W_\infty(\mu,\nu) =\text{inf}\{\|d(x,y)\|_{L^\infty}(\pi) \mid \pi \in \Gamma(\mu,\nu)\} \\
+    &= \underset{\pi \in \Gamma(\mu,\nu)}{\text{inf}}\text{inf}\{C \geq 0 \mid |d(x,y)| \leq C \text{ for } \pi \text{ almost all } (x,y)\} \end{align*} 
+    and we have $$(\mathcal{P}_\infty(X), W_\infty) \text{ is a metric space}$$ 
+\end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%% End of Presentation %%%%%%%%%%%%%%%%%
