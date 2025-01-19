@@ -90,7 +90,7 @@
     As a reminder, we have for any $p \in [1,\infty[$
     $$\mathcal{P}_p(X) \coloneqq \left\{\mu \in \mathcal{P}(X) \mid \int_X d^p(x, x_0) \, \mathrm{d}\mu(x) < \infty \right\}$$ and the following will be a metric on this space. 
     \begin{definition}
-        For any $p \in [1,\infty[$ and $\nu,\mu \in \mathcal{P}_2(X)$
+        For any $p \in [1,\infty[$ and $\nu,\mu \in \mathcal{P}_p(X)$
         $$W_p^p(\mu,\nu) \coloneqq \min \left\{\int_{X\times X}d^p(x,y)\mathrm{d}\pi(x,y) \mid \pi\in\Gamma(\mu,\nu)\right\}.$$
     \end{definition}
     \begin{theorem}
@@ -119,7 +119,7 @@
     In the Literature this is often called Gluing Lemma!
 
     \begin{lemma}
-        Let $(X_1,\mu_1), (X_1,\mu_2),(X_1,\mu_3)$ be Polish and $\pi^{1,2} \in \Gamma(\mu_1,\mu_2)$ and $\pi^{2,3} \in \Gamma(\mu_2,\mu_3)$. 
+        Let $(X_1,\mu_1), (X_2,\mu_2),(X_3,\mu_3)$ be Polish and $\pi^{1,2} \in \Gamma(\mu_1,\mu_2)$ and $\pi^{2,3} \in \Gamma(\mu_2,\mu_3)$. 
         Then there exists some $\pi \in \mathcal{P}(X_1 \times X_2 \times X_3)$ such that $$p_{\#}^{1,2}(\pi) = \pi^{1,2} \quad \text{ and } \quad p_{\#}^{2,3}(\pi) = \pi^{2,3}$$ where $p^{1,2}(x_1,x_2,x_3) = (x_1,x_2)$ and $p^{2,3}(x_1,x_2,x_3) = (x_2,x_3).$ 
     \end{lemma}
 
@@ -127,8 +127,8 @@
 \end{frame}
 
 \begin{frame}{Triangle inequality}
-    Let $\mu_1,\mu_2,\mu_3 \in \mathcal{P}(X)$, $\pi^{1,2}$ and $\pi^{2,3}$ be optimal. 
-    Let $\pi \in \mathcal{P}(X\times X\times X)$ be the measure from Dudley and $p^{1,3}_{\#}(\pi) = \pi^{1,3} \in \Gamma(\mu_1,\mu_3).$ 
+    Let $\mu_1,\mu_2,\mu_3 \in \mathcal{P}_2(X)$, $\pi^{1,2} \in \Gamma_o(\mu_1,\mu_2)$ and $\pi^{2,3} \in \Gamma_o(\mu_2,\mu_3)$ and 
+    $\pi$ is the measure we get from gluing $\pi^1,2$ with $\pi^2,3$. Let $p^{1,3}_{\#}(\pi) = \pi^{1,3} \in \Gamma(\mu_1,\mu_3).$ 
     \begin{align*}&W_2(\mu_1,\mu_3) 
         \leq\left(\int_{X\times X}d^2(x_1,x_3)\mathrm{d}\pi^{1,3}(x_1,x_3)\right)^{1/2} 
         \\&\uncover<2->{\overset{!}{=}\left(\int_{X\times X\times X}d^2(x_1,x_3)\mathrm{d}\pi(x_1,x_2,x_3)\right)^{1/2}}
@@ -149,8 +149,8 @@
 
 \begin{frame}{Wasserstein distance for normal distributions}
     For any $\mu_X,\mu_Y \in \mathcal{P}_2(\mathbb{R}^d)$ with $\mathcal{L}(X) = \mu_X$ and $\mathcal{L}(Y) = \mu_Y$ where $X$ and $Y$ are normally distributed, 
-    the Wasserstein distance can be calculated as follows $$W_2(\mu_x,\mu_Y) = \|m_X-m_Y\|^2 + \text{tr}\left(\Sigma_X-2 \cdot \left(\Sigma_Y^{1/2}\Sigma_X\Sigma_Y^{1/2}\right)^{1/2}+\Sigma_Y\right)$$
-    If $\Sigma_X$ and $\Sigma_Y$ commute, this simplifies to $$W_2(\mu_x,\mu_Y) = \|m_X-m_Y\|^2 + \sum_{i = 1}^d \left( \sqrt{\lambda_i^X} - \sqrt{\lambda_i^Y}  \right)^2$$
+    the Wasserstein distance can be calculated as follows $$W_2^2(\mu_x,\mu_Y) = \|m_X-m_Y\|^2 + \text{tr}\left(\Sigma_X-2 \cdot \left(\Sigma_Y^{1/2}\Sigma_X\Sigma_Y^{1/2}\right)^{1/2}+\Sigma_Y\right)$$
+    If $\Sigma_X$ and $\Sigma_Y$ commute, this simplifies to $$W_2^2(\mu_x,\mu_Y) = \|m_X-m_Y\|^2 + \sum_{i = 1}^d \left( \sqrt{\lambda_i^X} - \sqrt{\lambda_i^Y}  \right)^2$$
     where $\lambda_i^X$ and $\lambda_i^Y$ are the Eigenvalues of $\Sigma_X$ and $\Sigma_Y$ respectively. 
 \end{frame}
 
@@ -163,6 +163,15 @@ with $m_X = \begin{pmatrix}0 \\ 0 \end{pmatrix}$ and $m_Y = \begin{pmatrix}2 \\ 
 \end{frame}
 
 
+\begin{frame}{Lifting completeness from $X$ to $\mathcal{P}_p(X)$}
+    We remind ourselves of the metric version of the $L^p$ spaces. 
+        $$L^p(\Omega,\mathcal{F}, P, X) \coloneqq \left\{ f : \Omega \rightarrow X \mid f \text{ measurable }, \int_\Omega d^p(f,z_0) d P < \infty \right\}$$ with$$d_{L^p}^p(f,g) \coloneqq \int_\Omega d^p(f,g) dP$$
+        These are not necessarily vector spaces, but one can show that this more general notion of $L^p$ space is still complete if $(X,d)$ is. \\
+        This completeness is important for the following Theorem.
+    \begin{theorem}
+        Let $(X,d)$ be a complete metric space, then $(\mathcal{P}_p(X), W_p)$ is complete.
+    \end{theorem}
+\end{frame}
 
 \begin{frame}{Iterated Dudley Lemma}
     We want to represent a sequence of measures $(\mu_n)$ as the marginals of some measure in an infinite product space. \\ 
@@ -180,16 +189,21 @@ with $m_X = \begin{pmatrix}0 \\ 0 \end{pmatrix}$ and $m_Y = \begin{pmatrix}2 \\ 
     Proof is just applying the Dudley Lemma iteratively (hence the name :).
 \end{frame}
 
-\begin{frame}{Lifting completeness from $X$ to $\mathcal{P}_p(X)$}
-    For $N=\infty$ we get a sequence $(\pi_n)$ and can find a unique measure $\pi_\infty$ on $\mathbb{X} = \prod_{i = 1}^\infty X_i$ such that $$p^{(1,...,n)}_{\#} \pi_\infty = \pi_n.$$
-    Additionally, we remind ourselves of the metric version of the $L^p$ spaces. 
-        $$L^p(\Omega,\mathcal{F}, P, X) \coloneqq \left\{ f : \Omega \rightarrow X \mid f \text{ measurable }, \int_\Omega d^p(f,z_0) d P < \infty \right\}$$ with$$d_{L^p}^p(f,g) \coloneqq \int_\Omega d^p(f,g) dP$$
-        These are not necessarily vector spaces, but one can show that this more general notion of $L^p$ space is still complete. (Which we will need in the following)
-    \begin{theorem}
-        Let $(X,d)$ be a complete metric space, then $(\mathcal{P}_p(X), W_p)$ is complete.
-    \end{theorem}
+\begin{frame}{Prove of completeness}
+    We again consider $p = 2$. Assume $(\mu_n) \subseteq \mathcal{P}_2(X)$ is Cauchy. 
+    \begin{enumerate}
+        \item Applying Iterated Dudley on $(X,\mu_n)$ to get $(\pi_n)_{n \in \mathbb{N}}$ 
+        \item Get $\pi_\infty$ on $\mathbb{X} = \prod_{i = 1}^{\infty} X$ with $p^{(1,...,n)}_{\#}(\pi_\infty) = \pi_n.$
+        \item Show that the projections $(p_n)$ are Cauchy in $L^2(\mathbb{X}, \mathcal{B}_\infty, \pi_\infty,X)$
+        \item Use that $L^2(\mathbb{X}, \mathcal{B}_\infty, \pi_\infty,X)$ is complete to get $p_n \rightarrow p_\infty$
+        \item Define $\mu_\infty = (p_\infty)_{\#}(\pi_\infty)$ and prove $\mu_n \xrightarrow{W_2} \mu_\infty.$
+    \end{enumerate}
+    \begin{reminder}
+        If $\sum_{k = 1}^{\infty} d(x_n,x_{n+1}) < \infty$ then $(x_n)$ is Cauchy. \\
+        \vspace{0.5cm}
+        Also earlier in the Book, we had $$S_{\#}(P) = \mu \quad \text{ and } \quad T_{\#}(P) = \nu \Rightarrow (S,T)_{\#}(P) \in \Gamma(\mu,\nu).$$
+    \end{reminder}
 \end{frame}
-
 
 \begin{frame}{Duality for the Wasserstein Distance}
     By the Kantorovich-Rubinstein Duality we have \begin{align*} W_1(\mu,\nu) &= \sup_{(\phi,\psi) \in I_c} \left\{ \int_X \phi d\mu + \int_X \psi d\nu \right\} \\ &= \sup_{\|\phi\|_{Lip} \leq 1} \left\{\int_X \phi d\mu + \int_X \phi^c d\nu  \right\} 

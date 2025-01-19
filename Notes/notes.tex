@@ -294,8 +294,11 @@ Proof:
 \vspace{0.3cm} \\
 We again only prove it for $p = 2$, the other cases are similar.  \\
 
-Let $(\mu_n)$ be a cauchy sequence in $\mathcal{P}_2(X)$ with respect to $W_2$. Now, applying our idea from above using the Iterated Dudley Lemma for $\mu_n$ with $X_i = X$ and $\theta_n \in \Gamma_o(\mu_n,\mu_{n+1})$.
+Let $(\mu_n)$ be a cauchy sequence in $\mathcal{P}_2(X)$ with respect to $W_2$. 
+Now, applying our idea from above using the Iterated Dudley Lemma for $\mu_n$ with $X_i = X$ and $\theta_n \in \Gamma_o(\mu_n,\mu_{n+1})$.
 We thus get the above mentioned $\pi_\infty$ and by construction we have that the $\mu_n$ are the marginals of $\pi_\infty$. So we have $$p^n_{\#}(\pi) = \mu_n \quad (p_n,p_{n+1})_{\#}(\pi) = \theta_n.$$ 
+Here, the second follows since $$p^{n,n+1}_{\#}(\pi_\infty) =p^{n,n+1}_{\#}(p^{(1,...,N)}_{\#}(\pi_\infty)) = p^{n,n+1}_{\#}(\pi_N)=\theta_n$$ for $n < N$ since the inner push forward does nothing.
+
 Now, the key observation is the following, we can, without loss of generality assume that $\sum\limits_{n = 0}^\infty W_2(\mu_n,\mu_{n+1})$ exists, 
 because we can always extract a subsequence such that this holds and because our sequence is cauchy, the limit of the subsequence has to be the limit of the enitre sequence. 
 The subsequence we might construct could be the following, given $n_k$ choose $n_{k+1}$ such that $$W_2(\mu_{n_k},\mu_{n_{k+1}}) < 2^{-k},$$ 
