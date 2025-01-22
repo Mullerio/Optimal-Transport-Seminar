@@ -51,15 +51,15 @@
 \section{A metric for probabilites?}
 \subsection{The Wasserstein distance}
 \subsection{Dudley Lemma}
-\subsection{Comparing $L^2$ norm and Wasserstein distance}
 \subsection{Wasserstein for normal distributions}
 
 \section{Lifting completeness from $X$ to $\mathcal{P}_p(X)$}
 \subsection{Iterated Dudley Lemma}
 \section{Some things in case time permits}
+\subsection{Comparing $L^2$ and Wasserstein distance}
+\subsection{Duality for the Wasserstein 1 Metric}
 \subsection{Wasserstein $\infty$ metric}
-\subsection{Some other properties of the Wasserstein metric}
-% table of contents 
+
 \begin{frame}
     \frametitle{Outline}
     \tableofcontents
@@ -128,7 +128,7 @@
 
 \begin{frame}{Triangle inequality}
     Let $\mu_1,\mu_2,\mu_3 \in \mathcal{P}_2(X)$, $\pi^{1,2} \in \Gamma_o(\mu_1,\mu_2)$ and $\pi^{2,3} \in \Gamma_o(\mu_2,\mu_3)$ and 
-    $\pi$ is the measure we get from gluing $\pi^1,2$ with $\pi^2,3$. Let $p^{1,3}_{\#}(\pi) = \pi^{1,3} \in \Gamma(\mu_1,\mu_3).$ 
+    $\pi$ is the measure we get from gluing $\pi^{1,2}$ with $\pi^{2,3}$. Let $p^{1,3}_{\#}(\pi) = \pi^{1,3} \in \Gamma(\mu_1,\mu_3).$ 
     \begin{align*}&W_2(\mu_1,\mu_3) 
         \leq\left(\int_{X\times X}d^2(x_1,x_3)\mathrm{d}\pi^{1,3}(x_1,x_3)\right)^{1/2} 
         \\&\uncover<2->{\overset{!}{=}\left(\int_{X\times X\times X}d^2(x_1,x_3)\mathrm{d}\pi(x_1,x_2,x_3)\right)^{1/2}}
@@ -141,11 +141,6 @@
 
 
 
-\begin{frame}{Comparing $L^2$ norm and Wasserstein distance}
-    Let $\nu \ll \lambda^n$ with Radon Nikodym derivative $f$ such that $\text{supp}(f) \subseteq \overline{B_1}$. \\ 
-    \vspace{0.5cm}
-        Additionally, let $\mu_h \ll \lambda^n$ such that $f_h(x) = f(x+h)$. Then we have $$\|f_h-f\|^2_{L^2(\mathbb{R}^n)} = 2\|f\|_{L^2(\mathbb{R}^n)}^2$$ but on the other hand $$W_2(\mu_h,\mu) = \|h\|_2$$ which for large $\|h\|$ implies $$W_2(\mu_h,\mu) \gg \|f_h-f\|_{L^2(\mathbb{R}^n)}.$$ In case of small $\|h\|$ we can also find $W_2(\mu_h,\mu) \ll \|f_h-f\|_{L^2(\mathbb{R}^n)}$.
-\end{frame}
 
 \begin{frame}{Wasserstein distance for normal distributions}
     For any $\mu_X,\mu_Y \in \mathcal{P}_2(\mathbb{R}^d)$ with $\mathcal{L}(X) = \mu_X$ and $\mathcal{L}(Y) = \mu_Y$ where $X$ and $Y$ are normally distributed, 
@@ -189,7 +184,7 @@ with $m_X = \begin{pmatrix}0 \\ 0 \end{pmatrix}$ and $m_Y = \begin{pmatrix}2 \\ 
     Proof is just applying the Dudley Lemma iteratively (hence the name :).
 \end{frame}
 
-\begin{frame}{Prove of completeness}
+\begin{frame}{Proof of completeness}
     We again consider $p = 2$. Assume $(\mu_n) \subseteq \mathcal{P}_2(X)$ is Cauchy. 
     \begin{enumerate}
         \item Applying Iterated Dudley on $(X,\mu_n)$ to get $(\pi_n)_{n \in \mathbb{N}}$ 
@@ -203,6 +198,12 @@ with $m_X = \begin{pmatrix}0 \\ 0 \end{pmatrix}$ and $m_Y = \begin{pmatrix}2 \\ 
         \vspace{0.5cm}
         Also earlier in the Book, we had $$S_{\#}(P) = \mu \quad \text{ and } \quad T_{\#}(P) = \nu \Rightarrow (S,T)_{\#}(P) \in \Gamma(\mu,\nu).$$
     \end{reminder}
+\end{frame}
+
+\begin{frame}{Comparing $L^2$ norm and Wasserstein distance}
+    Let $\nu \ll \lambda^n$ with Radon Nikodym derivative $f$ such that $\text{supp}(f) \subseteq \overline{B_1}$. \\ 
+    \vspace{0.5cm}
+        Additionally, let $\mu_h \ll \lambda^n$ such that $f_h(x) = f(x+h)$. Then we have $$\|f_h-f\|^2_{L^2(\mathbb{R}^n)} = 2\|f\|_{L^2(\mathbb{R}^n)}^2$$ but on the other hand $$W_2(\mu_h,\mu) = \|h\|_2$$ which for large $\|h\|$ implies $$W_2(\mu_h,\mu) \gg \|f_h-f\|_{L^2(\mathbb{R}^n)}.$$ In case of small $\|h\|$ we can also find $W_2(\mu_h,\mu) \ll \|f_h-f\|_{L^2(\mathbb{R}^n)}$.
 \end{frame}
 
 \begin{frame}{Duality for the Wasserstein Distance}
